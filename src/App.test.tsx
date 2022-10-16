@@ -78,7 +78,7 @@ describe('App', async () => {
     expect(select).toHaveValue(valueDefault)
   })
 
-  test('It should show all the records when filter change to 2021', async () => {
+  test.only('It should show all the records when filter change to 2021', async () => {
     const selectElement = screen.getByLabelText('Año')
     await userEvent.selectOptions(selectElement, '2021')
     expect(selectElement).toHaveValue('2021')
