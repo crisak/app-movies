@@ -19,7 +19,7 @@ export type ErrorContextProps = {
   showError: (error: Omit<ProviderState, 'visible'>) => void
 }
 
-export const ErrorContext = createContext<ErrorContextProps | null>({
+export const ErrorContext = createContext<ErrorContextProps>({
   error: null as unknown,
   message: '',
   visible: false,

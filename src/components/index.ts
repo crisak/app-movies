@@ -1,5 +1,3 @@
-export {
-  default as ErrorProvider,
-  type ErrorContextProps
-} from './error-provider'
+export * from './error-provider'
+export * from './movies'
 export * from './error-provider'

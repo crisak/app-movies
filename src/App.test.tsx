@@ -18,7 +18,6 @@ import {
 } from '@testing-library/react'
 import App from './App'
 import { moviesService } from '@/services'
-import { ErrorProvider } from './components'
 
 vi.mock('@/services', async () => {
   const modules = await vi.importActual<{}>('@/__mocks__/services')
@@ -117,7 +116,17 @@ describe('App', async () => {
     })
   })
 
-  test.only('Should show a alert message when not load the data and it should close alert with a button', async () => {
+  test('Should show a list of movies released during the year 2020 that contain the word "Love" in their title', () => {
+    const moviesTitles = screen.getAllByTestId('movies-title')
+
+    expect(moviesTitles).toHaveLength(mockMovies.length)
+
+    moviesTitles.forEach((element) => {
+      expect(element).toHaveTextContent(/love/i)
+    })
+  })
+
+  test('Should show a alert message when not load the data and it should close alert with a button', async () => {
     clearTest()
     ;(moviesService.getAll as Mock).mockRejectedValue({
       error: 'Invalid query string',
@@ -132,11 +141,7 @@ describe('App', async () => {
     const errorElementFalsy = screen.queryByText(messageRequestError)
     expect(errorElementFalsy).not.toBeInTheDocument()
 
-    render(
-      <ErrorProvider>
-        <App />
-      </ErrorProvider>
-    )
+    render(<App />)
 
     /** Show alert error */
     const element = await screen.findByText(messageRequestError)

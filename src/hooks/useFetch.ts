@@ -3,15 +3,17 @@ import { useEffect, useRef, useState } from 'react'
 
 type UseFetchProps<T> = () => Promise<T>
 
-function useFetch<T = null>(requestFn: UseFetchProps<T>) {
-  const [data, setData] = useState<T | null>(null)
+function useFetch<Response = null>(requestFn: UseFetchProps<Response>) {
+  const [data, setData] = useState<Response | null>(null)
   const [loading, setLoading] = useState(true)
   const isMount = useRef(true)
-  const errorCtx = useError()
+  const { showError } = useError()
 
-  const request = async (requestFnRefresh?: UseFetchProps<T>) => {
+  const request = async (requestFnRefresh?: UseFetchProps<Response>) => {
     try {
-      let response: T
+      if (isMount.current) setLoading(true)
+
+      let response: Response
       if (requestFnRefresh) {
         response = await requestFnRefresh()
       } else {
@@ -22,7 +24,7 @@ function useFetch<T = null>(requestFn: UseFetchProps<T>) {
     } catch (error) {
       console.error(error)
       if (isMount.current) {
-        errorCtx?.showError({
+        showError({
           error: (error || null) as unknown,
           message: 'Error al obtener listado. Intente nuevamente'
         })
@@ -32,7 +34,7 @@ function useFetch<T = null>(requestFn: UseFetchProps<T>) {
     }
   }
 
-  const refresh = (requestFnRefresh?: UseFetchProps<T>) => {
+  const refresh = (requestFnRefresh?: UseFetchProps<Response>) => {
     if (requestFnRefresh) {
       request(requestFnRefresh)
       return
