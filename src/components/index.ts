@@ -1,3 +1,6 @@
 export * from './error-provider'
 export * from './movies'
-export * from './error-provider'
+export * from './select'
+export * from './loading'
+export * from './footer'
+export * from './filter-movies'

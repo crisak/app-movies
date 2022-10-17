@@ -23,6 +23,7 @@ function useFetch<Response = null>(requestFn: UseFetchProps<Response>) {
       if (isMount.current) setData(response)
     } catch (error) {
       console.error(error)
+      console.log('isMount.current', isMount.current)
       if (isMount.current) {
         showError({
           error: (error || null) as unknown,

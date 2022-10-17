@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react'
-
+import { Button, ContainerError, DetailError } from './ErrorProvider.styles'
 /** Provider */
 const defaultState = {
   error: null as unknown,
@@ -50,13 +50,13 @@ const ErrorProvider = ({
       return null
     }
     return (
-      <div className="detail-error">
+      <DetailError>
         <details>
           <summary>Ver más detelles</summary>
 
           <pre>{error.error ? JSON.stringify(error.error, null, 2) : null}</pre>
         </details>
-      </div>
+      </DetailError>
     )
   }
 
@@ -66,11 +66,11 @@ const ErrorProvider = ({
     }
 
     return (
-      <div className="toast-error">
+      <ContainerError>
         {error.message}
         {displayError()}
-        <button onClick={hideError}>Aceptar</button>
-      </div>
+        <Button onClick={hideError}>Aceptar</Button>
+      </ContainerError>
     )
   }
 

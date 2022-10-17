@@ -1,14 +1,17 @@
-import { ChangeEventHandler, useState } from 'react'
 import { moviesService } from '@/services'
 import { useFetch } from '@/hooks'
 import { MovieDto } from '@/dtos'
+import { Container } from '@/styles'
+import {
+  CardMovie,
+  Category,
+  ContainerMovies,
+  Detail,
+  Image
+} from './Movies.styles'
+import { Loading, FilterMovies } from '@/components'
 
-let yearInit = 2010
-const optionsFilter = new Array(12).fill(true).map((_) => String(yearInit++))
-const yearDefault = '2020'
-
-const Movies = () => {
-  const [filterValue, setFilterValue] = useState(yearDefault)
+const Movies = (filterValue: string) => {
   const {
     data: movies = [],
     loading,
@@ -17,55 +20,33 @@ const Movies = () => {
     return moviesService.getAll(filterValue)
   })
 
-  const onChangeFilter: ChangeEventHandler<HTMLSelectElement> = (event) => {
-    const value = event.currentTarget.value
-    setFilterValue(value)
+  const refreshRequest = (yearFilter: string) => {
     refresh(() => {
-      return moviesService.getAll(value)
+      return moviesService.getAll(yearFilter)
     })
   }
 
   return (
-    <>
-      <h1>NatiApps Movies</h1>
-      <div className="filter">
-        <label htmlFor="filterYear">Año</label>
-        <select
-          name="filterYear"
-          id="filterYear"
-          value={filterValue}
-          onChange={onChangeFilter}
-        >
-          {optionsFilter.map((year) => (
-            <option key={year} value={year}>
-              - {year}
-            </option>
-          ))}
-        </select>
-      </div>
+    <Container>
+      <FilterMovies onChange={refreshRequest} />
 
-      {loading && (
-        <div className="loading" data-testid="test-loading">
-          Loading ...
-        </div>
-      )}
+      <Loading position="center" data-testid="test-loading" loading={loading} />
 
       {movies && (
-        <ul>
+        <ContainerMovies>
           {movies.map((movie) => (
-            <li key={movie.id}>
-              <span data-testid="movies-title">{movie.name} | </span>
-              <span>{movie.year} | </span>
-              <span>{movie.category} | </span>
-              <span>{movie.imagePoster} </span>
-              <span>
-                <img src={movie.imagePoster} alt={`Image de ${movie.name}`} />
-              </span>
-            </li>
+            <CardMovie key={movie.id}>
+              <Category>{movie.category}</Category>
+              <Image src={movie.imagePoster} alt={`Image de ${movie.name}`} />
+              <Detail className="detail">
+                <h3 data-testid="movies-title">{movie.name}</h3>
+                {/* <span className="year">{movie.year}</span> */}
+              </Detail>
+            </CardMovie>
           ))}
-        </ul>
+        </ContainerMovies>
       )}
-    </>
+    </Container>
   )
 }
 
