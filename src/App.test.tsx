@@ -47,8 +47,11 @@ describe('App', async () => {
     clearTest()
   })
 
-  test('Should render application', () => {
-    const text = screen.getByText(/NatiApps Movies/i)
+  test('It should render application', () => {
+    const text = screen.getByRole('heading', {
+      name: /NativApps Movies/i,
+      level: 1
+    })
     expect(text).toBeInTheDocument()
     expect(text).toBeTruthy()
   })

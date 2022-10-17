@@ -4,6 +4,7 @@ import { COLORS, percentToHex, borderRadius } from '@/styles'
 const widthCard = '300px'
 
 export const ContainerMovies = styled.div`
+  margin-top: 5rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, 300px);
   justify-content: space-evenly;

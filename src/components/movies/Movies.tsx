@@ -11,13 +11,13 @@ import {
 } from './Movies.styles'
 import { Loading, FilterMovies } from '@/components'
 
-const Movies = (filterValue: string) => {
+const Movies = () => {
   const {
     data: movies = [],
     loading,
     refresh
   } = useFetch<MovieDto[]>(() => {
-    return moviesService.getAll(filterValue)
+    return moviesService.getAll('2020')
   })
 
   const refreshRequest = (yearFilter: string) => {
@@ -40,7 +40,7 @@ const Movies = (filterValue: string) => {
               <Image src={movie.imagePoster} alt={`Image de ${movie.name}`} />
               <Detail className="detail">
                 <h3 data-testid="movies-title">{movie.name}</h3>
-                {/* <span className="year">{movie.year}</span> */}
+                <span className="year">{movie.year}</span>
               </Detail>
             </CardMovie>
           ))}

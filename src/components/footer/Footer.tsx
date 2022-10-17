@@ -1,5 +1,6 @@
-import { Footer as FooterCustom } from './Footer.styles'
+import { Footer as FooterCustom, Socials } from './Footer.styles'
 import { Linkedin, Envelope, Github } from 'react-bootstrap-icons'
+import { Container } from '@/styles'
 
 const Footer = () => {
   return (
@@ -13,7 +14,7 @@ const Footer = () => {
         />
         <h4>NativApps Movies</h4>
       </div>
-      <div className="socials">
+      <Socials>
         <h2>Cristian Romero</h2>
         <a
           href="https://www.linkedin.com/in/cristian-romero-crisak/"
@@ -29,6 +30,9 @@ const Footer = () => {
           <Github />
           <span>Github</span>
         </a>
+      </Socials>
+      <div className="copyright">
+        <Container>©2022 by Crisak</Container>
       </div>
     </FooterCustom>
   )
