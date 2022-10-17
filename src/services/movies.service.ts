@@ -1,5 +1,10 @@
 class MoviesService {
   async getAll(year: string) {
+    throw {
+      error: 'Invalid query string',
+      message: 'Bad request'
+    }
+
     return [
       {
         id: 'tt2222042',

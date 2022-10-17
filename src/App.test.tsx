@@ -18,6 +18,7 @@ import {
 } from '@testing-library/react'
 import App from './App'
 import { moviesService } from '@/services'
+import { ErrorProvider } from './components'
 
 vi.mock('@/services', async () => {
   const modules = await vi.importActual<{}>('@/__mocks__/services')
@@ -78,7 +79,7 @@ describe('App', async () => {
     expect(select).toHaveValue(valueDefault)
   })
 
-  test.only('It should show all the records when filter change to 2021', async () => {
+  test('It should show all the records when filter change to 2021', async () => {
     const selectElement = screen.getByLabelText('Año')
     await userEvent.selectOptions(selectElement, '2021')
     expect(selectElement).toHaveValue('2021')
@@ -116,24 +117,29 @@ describe('App', async () => {
     })
   })
 
-  test('Should show a alert message when not load the data and close alert with a button', async () => {
+  test.only('Should show a alert message when not load the data and it should close alert with a button', async () => {
     clearTest()
     ;(moviesService.getAll as Mock).mockRejectedValue({
       error: 'Invalid query string',
       message: 'Bad request'
     })
 
-    const errorElementFalsy = screen.queryByText(
-      'Error al obtener listado. Intente nuevamente'
+    const messageRequestError = new RegExp(
+      'Error al obtener listado. Intente nuevamente',
+      'i'
     )
+
+    const errorElementFalsy = screen.queryByText(messageRequestError)
     expect(errorElementFalsy).not.toBeInTheDocument()
 
-    render(<App />)
+    render(
+      <ErrorProvider>
+        <App />
+      </ErrorProvider>
+    )
 
     /** Show alert error */
-    const element = await screen.findByText(
-      'Error al obtener listado. Intente nuevamente'
-    )
+    const element = await screen.findByText(messageRequestError)
     expect(element).toBeInTheDocument()
 
     /** Show button error */
@@ -142,9 +148,7 @@ describe('App', async () => {
 
     await userEvent.click(buttonElementError)
 
-    const errorMessage = screen.queryByText(
-      'Error al obtener listado. Intente nuevamente'
-    )
+    const errorMessage = screen.queryByText(messageRequestError)
     expect(errorMessage).not.toBeInTheDocument()
   })
 })
