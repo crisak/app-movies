@@ -1,4 +1,4 @@
-import { borderRadius, COLORS } from '@/styles'
+import { BORDER_RADIUS, COLORS } from '@/styles'
 import styled from 'styled-components'
 
 export const Select = styled.select`
@@ -6,6 +6,6 @@ export const Select = styled.select`
   border: 1px solid ${COLORS.primary};
   background-color: transparent;
   color: ${COLORS.primary};
-  border-radius: ${borderRadius};
+  border-radius: ${BORDER_RADIUS};
   width: 100%;
 `

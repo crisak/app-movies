@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { COLORS, percentToHex, borderRadius } from '@/styles'
+import { COLORS, percentToHex, BORDER_RADIUS } from '@/styles'
 
 const widthCard = '300px'
 
@@ -16,7 +16,7 @@ export const CardMovie = styled.article`
   display: flex;
   height: 400px;
   width: ${widthCard};
-  border-radius: ${borderRadius};
+  border-radius: ${BORDER_RADIUS};
   overflow: hidden;
   border: 1px solid ${COLORS.primary};
 
@@ -33,7 +33,7 @@ export const CardMovie = styled.article`
 `
 
 export const Image = styled.img`
-  border-radius: ${borderRadius};
+  border-radius: ${BORDER_RADIUS};
   height: 400px;
   width: 100%;
   object-fit: cover;
@@ -45,8 +45,8 @@ export const Image = styled.img`
 export const Detail = styled.div`
   box-sizing: border-box;
 
-  border-end-start-radius: ${borderRadius};
-  border-bottom-right-radius: ${borderRadius};
+  border-end-start-radius: ${BORDER_RADIUS};
+  border-bottom-right-radius: ${BORDER_RADIUS};
   position: absolute;
   bottom: 0;
   left: 0;
@@ -76,8 +76,8 @@ export const Category = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  border-top-right-radius: ${borderRadius};
-  border-bottom-left-radius: ${borderRadius};
+  border-top-right-radius: ${BORDER_RADIUS};
+  border-bottom-left-radius: ${BORDER_RADIUS};
 
   background-color: ${COLORS.secondary}${percentToHex(90)};
   border: 1px solid ${COLORS.primary};
@@ -85,3 +85,4 @@ export const Category = styled.div`
   padding: 0.5rem;
   z-index: 1;
 `
+

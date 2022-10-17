@@ -1,4 +1,4 @@
-import { borderRadius, COLORS, percentToHex } from '@/styles'
+import { BORDER_RADIUS, COLORS, percentToHex } from '@/styles'
 import styled from 'styled-components'
 
 export const ContainerError = styled.div`
@@ -10,7 +10,7 @@ export const ContainerError = styled.div`
   width: 100%;
   background-color: ${COLORS.error};
   color: ${COLORS.light};
-  border-radius: ${borderRadius};
+  border-radius: ${BORDER_RADIUS};
   padding: 1rem;
   box-shadow: 1px 2px 40px #00000073;
   box-sizing: border-box;
@@ -18,7 +18,7 @@ export const ContainerError = styled.div`
 
 export const Button = styled.button`
   background-color: transparent;
-  border-radius: ${borderRadius};
+  border-radius: ${BORDER_RADIUS};
   padding: 0.5rem 0.8rem;
   border: 1px solid ${COLORS.light};
   color: ${COLORS.light};

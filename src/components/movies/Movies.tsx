@@ -9,7 +9,8 @@ import {
   Detail,
   Image
 } from './Movies.styles'
-import { Loading, FilterMovies } from '@/components'
+import { Loading, FilterMovies, Alert } from '@/components'
+import { useEffect, useState } from 'react'
 
 const Movies = () => {
   const {
@@ -20,17 +21,36 @@ const Movies = () => {
     return moviesService.getAll('2020')
   })
 
+  const [alert, setState] = useState(false)
+
   const refreshRequest = (yearFilter: string) => {
     refresh(() => {
       return moviesService.getAll(yearFilter)
     })
   }
 
+  const handleCloseAlert = () => {
+    setState(false)
+  }
+
+  useEffect(() => {
+    if (!movies || movies?.length === 0) {
+      setState(true)
+    } else {
+      setState(false)
+    }
+  }, [movies])
+
   return (
     <Container>
       <FilterMovies onChange={refreshRequest} />
 
       <Loading position="center" data-testid="test-loading" loading={loading} />
+
+      <Alert visible={alert} variant="info" onClose={handleCloseAlert}>
+        <h3>Sin resultados</h3>
+        <p>Intente con otra fecha</p>
+      </Alert>
 
       {movies && (
         <ContainerMovies>

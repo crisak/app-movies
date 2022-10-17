@@ -13,6 +13,7 @@ export const Footer = styled.footer`
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   overflow: hidden;
+  box-shadow: 0px -6px 20px 0px #0000002e;
 
   &::before {
     content: '';
