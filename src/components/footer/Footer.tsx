@@ -7,7 +7,7 @@ const Footer = () => {
     <FooterCustom>
       <div>
         <img
-          src="/src/assets/natiapps-logo.png"
+          src="/images/natiapps-logo.png"
           alt="Logo de NativApps"
           width={50}
           height={50}

@@ -9,7 +9,7 @@
 
 **Demo**
 
-<a href="https://www.google.com" target="_blank">https://www.google.com</a>
+<a href="https://www.google.com" target="_blank">https://app-movies-production.up.railway.app/</a>
 
 
 
@@ -19,13 +19,13 @@
 $ yarn install
 ```
 
-## 🚀 Deploy APP
+## 🧪 Scripts available
+
+### Run project in production
 
 ```bash
-$ yarn deploy
+$ yarn start
 ```
-
-## 🧪 Scripts available
 
 ### Run tests
 

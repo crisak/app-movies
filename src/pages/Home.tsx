@@ -11,7 +11,7 @@ const Home = () => {
       </Helmet>
       <Header>
         <img
-          src="/src/assets/natiapps-logo.png"
+          src="/images/natiapps-logo.png"
           alt="Logo de NativApps"
           width={80}
           height={80}

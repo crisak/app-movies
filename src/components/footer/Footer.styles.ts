@@ -23,7 +23,7 @@ export const Footer = styled.footer`
     position: absolute;
     bottom: 0;
     right: 0;
-    background-image: url(/src/assets/natiapps-logo.png);
+    background-image: url(/images/natiapps-logo.png);
     background-size: contain;
     background-repeat: repeat;
     background-position: center;
