@@ -19,6 +19,14 @@ import {
 import App from './App'
 import { moviesService } from '@/services'
 
+vi.mock('@/components/virtual-scroll-movies', async () => {
+  const modules = await vi.importActual<{}>(
+    '@/__mocks__/components/virtual-scroll-movies'
+  )
+
+  return modules
+})
+
 vi.mock('@/services', async () => {
   const modules = await vi.importActual<{}>('@/__mocks__/services')
   return {
