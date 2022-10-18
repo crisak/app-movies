@@ -4,6 +4,7 @@ import { COLORS, percentToHex } from '@/styles'
 export const Footer = styled.footer`
   position: relative;
   width: 100%;
+  height: auto;
   margin-top: 2rem;
   background-color: ${COLORS.secondary};
 

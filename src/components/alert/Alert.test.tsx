@@ -30,7 +30,6 @@ describe('Alert', () => {
     )
     const result = screen.getByRole('alert')
 
-    screen.debug(result)
     expect(result).toBeInTheDocument()
     expect(result).toHaveClass('alert--info')
     expect(result).toHaveTextContent(/All is ok/i)

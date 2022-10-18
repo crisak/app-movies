@@ -2,15 +2,8 @@ import { moviesService } from '@/services'
 import { useFetch } from '@/hooks'
 import { MovieDto } from '@/dtos'
 import { Container } from '@/styles'
-import {
-  CardMovie,
-  Category,
-  ContainerMovies,
-  Detail,
-  Image
-} from './Movies.styles'
-import { Loading, FilterMovies, Alert } from '@/components'
-import { useEffect, useState } from 'react'
+import { Loading, FilterMovies, Alert, VirtualScrollMovies } from '@/components'
+import { useEffect, useMemo, useState } from 'react'
 
 const Movies = () => {
   const {
@@ -33,6 +26,22 @@ const Movies = () => {
     setState(false)
   }
 
+  const virtualMovies = useMemo(() => {
+    if (!movies || movies.length === 0) {
+      return []
+    }
+
+    const byGroups = 4
+
+    const totalGroups = Math.ceil(movies.length / byGroups)
+    debugger
+    return [...Array(totalGroups)].map((_, index) => {
+      const endIndex: number = (index + 1) * byGroups
+      const startIndex: number = endIndex - byGroups
+      return movies.slice(startIndex, endIndex)
+    })
+  }, [movies])
+
   useEffect(() => {
     if (!movies || movies?.length === 0) {
       setState(true)
@@ -42,31 +51,26 @@ const Movies = () => {
   }, [movies])
 
   return (
-    <Container>
-      <FilterMovies onChange={refreshRequest} />
+    <>
+      <Container>
+        <FilterMovies onChange={refreshRequest} />
 
-      <Loading position="center" data-testid="test-loading" loading={loading} />
+        <Loading
+          position="center"
+          data-testid="test-loading"
+          loading={loading}
+        />
 
-      <Alert visible={alert} variant="info" onClose={handleCloseAlert}>
-        <h3>Sin resultados</h3>
-        <p>Intente con otra fecha</p>
-      </Alert>
+        <Alert visible={alert} variant="info" onClose={handleCloseAlert}>
+          <h3>Sin resultados</h3>
+          <p>Intente con otra fecha</p>
+        </Alert>
+      </Container>
 
-      {movies && (
-        <ContainerMovies>
-          {movies.map((movie) => (
-            <CardMovie key={movie.id}>
-              <Category>{movie.category}</Category>
-              <Image src={movie.imagePoster} alt={`Image de ${movie.name}`} />
-              <Detail className="detail">
-                <h3 data-testid="movies-title">{movie.name}</h3>
-                <span className="year">{movie.year}</span>
-              </Detail>
-            </CardMovie>
-          ))}
-        </ContainerMovies>
+      {virtualMovies.length > 0 && (
+        <VirtualScrollMovies rows={virtualMovies || []} />
       )}
-    </Container>
+    </>
   )
 }
 

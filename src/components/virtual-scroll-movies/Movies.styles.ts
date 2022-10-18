@@ -5,13 +5,24 @@ const widthCard = '300px'
 
 export const ContainerMovies = styled.div`
   margin-top: 5rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 300px);
-  justify-content: space-evenly;
-  gap: 2rem;
+  width: 100%;
+  position: relative;
 `
 
-export const CardMovie = styled.article`
+export const Row = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+  justify-content: space-evenly;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+  flex-wrap: wra;
+`
+
+export const Column = styled.article`
   position: relative;
   display: flex;
   height: 400px;
@@ -25,10 +36,30 @@ export const CardMovie = styled.article`
       background-color: ${COLORS.primary}${percentToHex(95)};
     }
 
-    img {
+    img,
+    svg {
       filter: brightness(1);
       transform: scale(1.1);
     }
+  }
+`
+
+export const PreviewImage = styled.div`
+  height: 400px;
+  width: 100%;
+  background-color: ${COLORS.secondary};
+  color: ${COLORS.primary};
+  border-radius: ${BORDER_RADIUS};
+  object-fit: cover;
+  object-position: top;
+
+  filter: brightness(0.7);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  svg {
+    transition: all 0.3s;
   }
 `
 
@@ -85,4 +116,3 @@ export const Category = styled.div`
   padding: 0.5rem;
   z-index: 1;
 `
-

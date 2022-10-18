@@ -1,19 +1,21 @@
-import { ErrorProvider, Footer } from '@/components'
+import { ErrorProvider, Footer, Layout, ScrollProvider } from '@/components'
 import { Home } from '@/pages'
-import { Background, Main, Layout } from '@/styles'
+import { Background, Main } from '@/styles'
 
 function App() {
   return (
-    <ErrorProvider>
-      <Background>
-        <Layout>
-          <Main>
-            <Home />
-          </Main>
-          <Footer />
-        </Layout>
-      </Background>
-    </ErrorProvider>
+    <ScrollProvider>
+      <ErrorProvider>
+        <Background>
+          <Layout>
+            <Main>
+              <Home />
+            </Main>
+            <Footer />
+          </Layout>
+        </Background>
+      </ErrorProvider>
+    </ScrollProvider>
   )
 }
 
