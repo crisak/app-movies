@@ -17,8 +17,6 @@ type VirtualScrollMoviesPros<T = any> = { rows: T[] }
 function VirtualScrollMovies({ rows }: VirtualScrollMoviesPros<any>) {
   const { refElement: parentRef } = useScrollProvider()
 
-  console.log('refElement->', parentRef)
-
   const rowVirtualizer = useVirtualizer({
     count: rows.length,
     getScrollElement: () => parentRef?.current,

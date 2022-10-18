@@ -34,7 +34,6 @@ const Movies = () => {
     const byGroups = 4
 
     const totalGroups = Math.ceil(movies.length / byGroups)
-    debugger
     return [...Array(totalGroups)].map((_, index) => {
       const endIndex: number = (index + 1) * byGroups
       const startIndex: number = endIndex - byGroups

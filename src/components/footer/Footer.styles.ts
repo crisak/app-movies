@@ -5,6 +5,7 @@ export const Footer = styled.footer`
   position: relative;
   width: 100%;
   height: auto;
+  min-height: 180px;
   margin-top: 2rem;
   background-color: ${COLORS.secondary};
 
@@ -40,6 +41,7 @@ export const Footer = styled.footer`
   }
 
   .copyright {
+    text-align: center;
     position: absolute;
     bottom: 0;
     width: 100%;
